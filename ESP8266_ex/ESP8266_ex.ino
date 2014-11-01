@@ -5,7 +5,6 @@
 
 ESP8266 esp8266 = ESP8266();
 
-boolean ready = false;
 void setup()
 {
   Serial.begin(9600); //Open serial communications 
@@ -17,7 +16,7 @@ void setup()
 
 void loop()
 {
-  esp8266.uploadPacket(DST_IP);
+  esp8266.uploadPacket(DST_IP, "origin=CS5&data=5aT23[CS1]");
   delay(10000);
 }
 

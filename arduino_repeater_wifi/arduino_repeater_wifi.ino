@@ -36,8 +36,14 @@ Crimes in programming have been committed by Chris Stubbs in a futile attempt to
 #include "RFM69.h"
 #include "LowPower.h"
 #include "NodeConfig.h"
+#include "ESP8266.h"
+#include "wifiConfig.h" //this is where you need to set your SSID and Password
+#define DST_IP "212.71.255.157" //ukhas.net 212.71.255.157
+#define WIFI_EN 7 //CH_PD
+
 
 //************* Misc Setup ****************/
+ESP8266 esp8266 = ESP8266();
 float battV=0.0;
 uint8_t n;
 uint32_t count = 1, data_interval = 2; // Initially send a couple of beacons in quick succession
@@ -100,6 +106,12 @@ int gen_Data(){
 
 void setup() 
 {
+  Serial.begin(9600); //Open serial communications 
+  esp8266.initialise(Serial, WIFI_EN); //Pass it over to the ESP8266 class, along with the pin number to enable the module (CH_PD)
+  while (!esp8266.resetModule()); //reset module until it is ready
+  esp8266.tryConnectWifi(SSID, PASS);//connect to the wifi
+  esp8266.singleConnectionMode(); //set the single connection mode
+  
   analogReference(INTERNAL); // 1.1V ADC reference
   randomSeed(analogRead(6));
   delay(1000);
@@ -171,6 +183,11 @@ void loop()
           delay(random(50, 800));
           
           rf69.send((uint8_t*)buf, packet_len, rfm_power);
+          String uploadPacket = "origin=";
+          uploadPacket += id;
+          uploadPacket += "&data=";
+          uploadPacket += (uint8_t*)buf;
+          esp8266.uploadPacket(DST_IP, uploadPacket);
         }
       }
     }
