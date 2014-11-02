@@ -120,7 +120,9 @@ void ESP8266::uploadPacket(String dst_ip, String packet) {
   //Build up POST request
   //String postvars = "origin=CS5&data=5aT23[CS1]";
   cmd = "POST /api/upload HTTP/1.0\n";
+  //cmd = "POST / HTTP/1.0\n";
   cmd += "Host: ukhas.net\n";
+  //cmd += "Host: localhost\n";
   cmd += "Content-Type: application/x-www-form-urlencoded\n";
   cmd += "Content-Length: ";
   cmd += packet.length();

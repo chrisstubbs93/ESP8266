@@ -183,10 +183,30 @@ void loop()
           delay(random(50, 800));
           
           rf69.send((uint8_t*)buf, packet_len, rfm_power);
+          
+          String tmpBuf;
+          
+          //memcpy((uint8_t*)buf,char(tmpBuf),64);
+          
+          for (int i = 0; i < sizeof(buf); i++){
+            tmpBuf += char(buf[i]);
+            //char tmpChar = char(buf[i]);
+            if(buf[i+1] == atoi("]")) break;
+          }
+
+          Serial.println("------");
+          Serial.print("-");
+          Serial.print(tmpBuf);
+          Serial.println("-");
+          Serial.println("------");
+          
+          delay(1000);
+          
+          
           String uploadPacket = "origin=";
           uploadPacket += id;
           uploadPacket += "&data=";
-          uploadPacket += (uint8_t*)buf;
+          uploadPacket.concat(tmpBuf);
           esp8266.uploadPacket(DST_IP, uploadPacket);
         }
       }
