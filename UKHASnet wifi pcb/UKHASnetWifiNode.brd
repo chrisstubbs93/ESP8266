@@ -2954,7 +2954,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="30.434190625" y="29.96254375" size="0.8128" layer="25" font="vector" ratio="10" rot="R90"/>
 </element>
 <element name="J$1" library="SparkFun-Connectors" package="SMA-EDGE" value="SMA_EDGE" x="2.181209375" y="9.63534375" rot="R90"/>
-<element name="C1" library="rcl" package="C0603" value="" x="9.40190625" y="8.808175" smashed="yes" rot="R180">
+<element name="C1" library="rcl" package="C0603" value="100nf" x="9.40190625" y="8.808175" smashed="yes" rot="R180">
 <attribute name="NAME" x="12.6171875" y="9.229309375" size="0.8128" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="10.03690625" y="10.713175" size="1.27" layer="27" rot="R180"/>
 </element>
@@ -3020,7 +3020,7 @@ design rules under a new name.</description>
 <attribute name="OC_FARNELL" value="1798318" x="4.457784375" y="4.49184375" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="0.705715625" y="1.397140625" size="0.8128" layer="25" font="vector" rot="SR0"/>
 </element>
-<element name="C2" library="rcl" package="C0603" value="0.1uf" x="13.474071875" y="6.431175" smashed="yes" rot="R180">
+<element name="C2" library="rcl" package="C0603" value="100nf" x="13.474071875" y="6.431175" smashed="yes" rot="R180">
 <attribute name="NAME" x="12.7181875" y="7.490096875" size="0.8128" layer="25" font="vector"/>
 </element>
 <element name="C5" library="rcl" package="C0603" value="1uf" x="10.42686875" y="5.78341875" smashed="yes" rot="R270">
@@ -3034,7 +3034,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="14.792321875" y="5.053065625" size="0.8128" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="16.425734375" y="5.630334375" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="C6" library="rcl" package="C0603" value="" x="13.419559375" y="31.622746875" smashed="yes" rot="R180">
+<element name="C6" library="rcl" package="C0603" value="100nf" x="13.419559375" y="31.622746875" smashed="yes" rot="R180">
 <attribute name="NAME" x="11.70023125" y="31.944671875" size="0.8128" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="14.054559375" y="33.527746875" size="1.27" layer="27" rot="R180"/>
 </element>
