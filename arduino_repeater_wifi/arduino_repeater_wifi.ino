@@ -120,6 +120,8 @@ void setup()
     delay(100);
   }
   
+  
+  
   int packet_len = gen_Data();
   rf69.send((uint8_t*)data, packet_len, rfm_power);
   
@@ -157,6 +159,23 @@ void loop()
         uint8_t len = sizeof(buf);
         
         rf69.recv(buf, &len);
+        
+        delay(500); //delay for safe keeping
+        
+        //Build up the string to upload to server
+        String uploadPacket = "origin=";
+        uploadPacket += id; //gateway nodes ID
+        uploadPacket += "&data=";
+        
+        for (int i = 0; i < len-1; i++){ 
+          uploadPacket += char(buf[i]); //copy the packet from the buffer we got from rf69.recv into our upload string. There may be neater ways of doing this.
+        }
+        
+        uploadPacket += "&rssi=";      
+        uploadPacket += String(rf69.lastRssi());
+        uploadPacket += "\0"; //null terminate the string for safe keeping
+        esp8266.uploadPacket(DST_IP, uploadPacket);
+        
 
         // find end of packet & start of repeaters
         int end_bracket = -1, start_bracket = -1;        
@@ -184,30 +203,6 @@ void loop()
           
           rf69.send((uint8_t*)buf, packet_len, rfm_power);
           
-          String tmpBuf;
-          
-          //memcpy((uint8_t*)buf,char(tmpBuf),64);
-          
-          for (int i = 0; i < sizeof(buf); i++){
-            tmpBuf += char(buf[i]);
-            //char tmpChar = char(buf[i]);
-            if(buf[i+1] == atoi("]")) break;
-          }
-
-          Serial.println("------");
-          Serial.print("-");
-          Serial.print(tmpBuf);
-          Serial.println("-");
-          Serial.println("------");
-          
-          delay(1000);
-          
-          
-          String uploadPacket = "origin=";
-          uploadPacket += id;
-          uploadPacket += "&data=";
-          uploadPacket.concat(tmpBuf);
-          esp8266.uploadPacket(DST_IP, uploadPacket);
         }
       }
     }
