@@ -112,6 +112,11 @@ void setup()
   esp8266.tryConnectWifi(SSID, PASS);//connect to the wifi
   esp8266.singleConnectionMode(); //set the single connection mode
   
+  #ifdef STAT_LEDS
+  pinMode(RXLED, OUTPUT);
+  pinMode(TXLED, OUTPUT);
+  #endif
+  
   analogReference(INTERNAL); // 1.1V ADC reference
   randomSeed(analogRead(6));
   delay(1000);
@@ -160,6 +165,12 @@ void loop()
         
         rf69.recv(buf, &len);
         
+        #ifdef STAT_LEDS
+        digitalWrite(RXLED, HIGH);
+        delay(100);
+        digitalWrite(RXLED, LOW);
+        #endif
+        
         delay(500); //delay for safe keeping
         
         //Build up the string to upload to server
@@ -202,6 +213,12 @@ void loop()
           delay(random(50, 800));
           
           rf69.send((uint8_t*)buf, packet_len, rfm_power);
+          
+        #ifdef STAT_LEDS
+        digitalWrite(TXLED, HIGH);
+        delay(100);
+        digitalWrite(TXLED, LOW);
+        #endif
           
         }
       }

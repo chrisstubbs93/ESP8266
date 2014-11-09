@@ -10,6 +10,9 @@ byte num_repeats = '5'; //The number of hops the message will make in the networ
 #define BEACON_INTERVAL 55 // Beacon Interval is (x * 8) seconds
 uint8_t rfm_power = 20; // dBmW
 #define SENSITIVE_RX // Enables TESTLNA_SENSITIVE
+#define STAT_LEDS // Enables status LEDs
+#define RXLED 5
+#define TXLED 6
 #endif
 #ifdef P02
 char id[] = "P02";
